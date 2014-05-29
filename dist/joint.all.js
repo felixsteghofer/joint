@@ -1,4 +1,4 @@
-/*! JointJS v0.9.0 - JavaScript diagramming library  2014-05-14 
+/*! JointJS v0.8.1 - JavaScript diagramming library  2014-05-13 
 
 
 This Source Code Form is subject to the terms of the Mozilla Public
@@ -16883,6 +16883,10 @@ if ( typeof window === "object" && typeof window.document === "object" ) {
         } else if (name === 'id') {
             el.id = value;
         } else {
+            //TODO Felix bad hack. Space is not allowed as xml value.
+            if (value === ' ') {
+                value = '';
+            }
             el.setAttribute(name, value);
         }
     }
@@ -17442,7 +17446,7 @@ if ( typeof window === "object" && typeof window.document === "object" ) {
         for (var component in m) {
             svgMatrix[component] = m[component];
         }
-        
+
         return svgMatrix;
     };
 
