@@ -16,10 +16,10 @@ module.exports = function(grunt) {
         },
         
         core: [
-            'src/core.js', 'src/joint.dia.graph.js', 'src/joint.dia.cell.js', 'src/joint.dia.element.js', 'src/joint.dia.link.js', 'src/joint.dia.paper.js',
+            'src/core.js', 'src/joint.dia.graph.js', 'src/joint.dia.cell.js', 'src/joint.dia.element.js', 'src/joint.dia.link.js', 'src/joint.dia.paper.js', 'src/joint.dia.js',
             'plugins/joint.shapes.basic.js',
             'plugins/routers/joint.routers.orthogonal.js', 'plugins/routers/joint.routers.manhattan.js', 'plugins/routers/joint.routers.metro.js',
-            'plugins/connectors/joint.connectors.normal.js', 'plugins/connectors/joint.connectors.rounded.js', 'plugins/connectors/joint.connectors.smooth.js'            
+            'plugins/connectors/joint.connectors.normal.js', 'plugins/connectors/joint.connectors.rounded.js', 'plugins/connectors/joint.connectors.smooth.js'
         ],
 
         plugins: {
