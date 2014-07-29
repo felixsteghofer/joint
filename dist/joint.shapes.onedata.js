@@ -1,4 +1,11 @@
-/*! JointJS v0.9.0 - JavaScript diagramming library  2014-06-06 
+/*! JointJS v0.9.0 - JavaScript diagramming library  2014-07-29 
+
+
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+/*! Fork of JointJS v0.9.0 - JavaScript diagramming library  2014-06-06 
 
 
 This Source Code Form is subject to the terms of the Mozilla Public
@@ -298,6 +305,7 @@ joint.shapes.logic.Wire = joint.dia.Link.extend({
 });
 
 //generic 3 input 1 output element
+
 joint.shapes.logic.Gate31 = joint.shapes.logic.Gate.extend({
 
     markup: '<g class="rotatable"><g class="scalable"><image class="body" /></g><circle class="input input1"/><circle  class="input input2" /> <circle class="input input3"/><circle class="output"/></g>',
@@ -307,24 +315,40 @@ joint.shapes.logic.Gate31 = joint.shapes.logic.Gate.extend({
         type: 'logic.Gate31',
         superType: 'oneData.WorkflowNode',
         attrs: {
-            '.input1': { ref: '.body', 'ref-x': -2, 'ref-y': 0.1, magnet: 'passive', port: 'in1', dataType: oneData.dataType.INT, isOptional: false },
-            '.input2': { ref: '.body', 'ref-x': -2, 'ref-y': 0.5, magnet: 'passive', port: 'in2', dataType: oneData.dataType.STRING, isOptional: false },
-            '.input3': { ref: '.body', 'ref-x': -2, 'ref-y': 0.9, magnet: 'passive', port: 'in3', dataType: oneData.dataType.FLOAT, isOptional: true },
-            '.output': { ref: '.body', 'ref-dx': 2, 'ref-y': 0.5, magnet: true, port: 'out', dataType: oneData.dataType.INT }
+            '.input1': { ref: '.body', 'ref-x': -2, 'ref-y': 0.1, magnet: 'passive'},
+            '.input2': { ref: '.body', 'ref-x': -2, 'ref-y': 0.5, magnet: 'passive'},
+            '.input3': { ref: '.body', 'ref-x': -2, 'ref-y': 0.9, magnet: 'passive'},
+            '.output': { ref: '.body', 'ref-dx': 2, 'ref-y': 0.5, magnet: true,}
         }
 
     }, joint.shapes.logic.Gate.prototype.defaults)
 });
 
-//specific element with 3 inputs and 1 output
+//
+// specific element with 3 inputs and 1 output
+// This is an example of an onedata processor object. Ports may hold types of data they
+// can be connected to. Another possible attribute could be isOptional (though not used atm)
+// Don't forget to set both the model and the gui element like here (needed for overall accessibility)
+//
 joint.shapes.logic.Custom = joint.shapes.logic.Gate31.extend({
 
     defaults: joint.util.deepSupplement({
 
         type: 'logic.Custom',
         supertype: 'oneData.WorkflowNode',
+        inPorts: [{port: 'in1', dataType: oneData.dataType.INT, isOptional: false },
+                  {port: 'in2', dataType: oneData.dataType.STRING, isOptional: false },
+                  {port: 'in3', dataType: oneData.dataType.FLOAT, isOptional: false }],
+        outPorts: [{port: 'out', dataType: oneData.dataType.INT}],
 
-        attrs: { image: { 'xlink:href': 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjEwMCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB' +
+        attrs: { 
+            '.input1': { port: 'in1', dataType: oneData.dataType.INT},
+            '.input2': { port: 'in2', dataType: oneData.dataType.STRING},
+            '.input3': { port: 'in3', dataType: oneData.dataType.FLOAT},
+            '.output': { port: 'out', dataType: oneData.dataType.INT },
+
+            image: { 'xlink:href': 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd' +
+            '2lkdGg9IjEwMCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB' +
             '4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCiA8bWV0YWRhdGEgaWQ9Im1ldGFkYXRhNy' +
             'I+aW1hZ2Uvc3ZnK3htbDwvbWV0YWRhdGE+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGcgaWQ9Imxhe' +
             'WVyMSI+CiAgIDxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIzIiBpZD0icGF0aDMw' +
