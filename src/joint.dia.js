@@ -549,7 +549,7 @@ joint.ui.FreeTransform = Backbone.View.extend({
         this.$el.css({
             'width': bbox.width + 4,
             'height': bbox.height + 4,
-            'left': bbox.x - 3,
+            'left': bbox.x - 13,
             'top': bbox.y + 103,
             'transform': transformVal,
             '-webkit-transform': transformVal, // chrome + safari
